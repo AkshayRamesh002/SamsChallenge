@@ -199,52 +199,6 @@ public class MainActivity extends AppCompatActivity {
         return jsonObjectRequest;
 
     }
-
-
-
-    private void parseJSON() {
-        //optstring for all variable
-        // internet connection
-        // dynamic url
-
-        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url+"1/30", null,
-                new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        try {
-//                            Log.i("RESPONSE_JSON", response.toString());
-                            JSONArray jsonArray = response.getJSONArray("products");
-
-                            for (int i = 0; i < jsonArray.length(); i++) {
-                                JSONObject hit = jsonArray.getJSONObject(i);
-
-                                String productName = hit.getString("productName");
-                                String shortDescription = hit.optString("shortDescription");
-                                if (shortDescription.equals("")) {
-                                    shortDescription = "NONE";
-                                }
-                                Log.i("PRODUCT_NAME", productName);
-                                String price = hit.getString("price");
-                                String imageUrl = hit.getString("productImage");
-
-                                mCardItemList.add(new CardItem(productName, shortDescription, price, main_url + imageUrl));
-                            }
-
-                            mCardAdapter = new CardAdapter(MainActivity.this, mCardItemList);
-                            mRecyclerView.setAdapter(mCardAdapter);
-
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                error.printStackTrace();
-            }
-        });
-
-        mRequestQueue.add(request);
-    }
+    
 }
 
