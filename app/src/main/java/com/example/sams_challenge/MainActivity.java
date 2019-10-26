@@ -2,7 +2,6 @@ package com.example.sams_challenge;
 
 import android.os.Bundle;
 import android.util.Log;
-import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -33,12 +32,11 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity {
 
     private RecyclerView mRecyclerView;
+    private ArrayList<CardItem> mCardItemList = new ArrayList<>();
     private CardAdapter mCardAdapter;
-    private ArrayList<CardItem> mCardItemList;
     private RequestQueue mRequestQueue;
     private LinearLayoutManager layoutManager;
     private int page = 1;
-    private ProgressBar progressBarLoading;
 
 
     String main_url = "https://mobile-tha-server.firebaseapp.com";
@@ -53,13 +51,14 @@ public class MainActivity extends AppCompatActivity {
 
         mRecyclerView = findViewById(R.id.recycler_view);
         layoutManager = new LinearLayoutManager(getApplicationContext());
-        mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setLayoutManager(layoutManager);
 
+        mCardAdapter = new CardAdapter(MainActivity.this,mCardItemList);
+        mRecyclerView.setAdapter(mCardAdapter);
 
-        mCardItemList = new ArrayList<>();
+        mRecyclerView.addOnScrollListener(prOnScrollListener);
 
-//        mRecyclerView.addOnScrollListener(prOnScrollListener);
+
 
 
         mRequestQueue = Volley.newRequestQueue(this);
@@ -67,38 +66,38 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-//    private RecyclerView.OnScrollListener prOnScrollListener = new RecyclerView.OnScrollListener() {
-//        @Override
-//        public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
-//            super.onScrollStateChanged(recyclerView, newState);
-//        }
-//
-//        @Override
-//        public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-//            super.onScrolled(recyclerView, dx, dy);
-//
-//            if(islastItemDisplaying(recyclerView)){
-//                //so i would call the get data method here
-//                // show loading progress
-//                getData();
-//                Log.i("ListActivity", "LoadMore");
-//            }
-//        }
-//
-//
-//    };
-//    private boolean islastItemDisplaying(RecyclerView recyclerView){
-//        //check if the adapter item count is greater than 0
-//        if(recyclerView.getAdapter().getItemCount() != 0){
-//            //get the last visible item on screen using the layoutmanager
-//            int lastVisibleItemPosition = ((LinearLayoutManager)recyclerView.getLayoutManager()).findLastCompletelyVisibleItemPosition();
-//            //apply some logic here.
-//            if(lastVisibleItemPosition != RecyclerView.NO_POSITION && lastVisibleItemPosition == recyclerView.getAdapter().getItemCount() - 1)
-//                return true;
-//        }
-//
-//        return  false;
-//    }
+    private RecyclerView.OnScrollListener prOnScrollListener = new RecyclerView.OnScrollListener() {
+        @Override
+        public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+            super.onScrollStateChanged(recyclerView, newState);
+        }
+
+        @Override
+        public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+            super.onScrolled(recyclerView, dx, dy);
+
+            if(islastItemDisplaying(recyclerView)){
+                //so i would call the get data method here
+                // show loading progress
+                getData();
+                Log.i("ListActivity", "LoadMore");
+            }
+        }
+
+
+    };
+    private boolean islastItemDisplaying(RecyclerView recyclerView){
+        //check if the adapter item count is greater than 0
+        if(recyclerView.getAdapter().getItemCount() != 0){
+            //get the last visible item on screen using the layoutmanager
+            int lastVisibleItemPosition = ((LinearLayoutManager)recyclerView.getLayoutManager()).findLastCompletelyVisibleItemPosition();
+            //apply some logic here.
+            if(lastVisibleItemPosition != RecyclerView.NO_POSITION && lastVisibleItemPosition == recyclerView.getAdapter().getItemCount() - 1)
+                return true;
+        }
+
+        return  false;
+    }
 
     private void getData(){
 
@@ -132,9 +131,7 @@ public class MainActivity extends AppCompatActivity {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-
-        mCardAdapter = new CardAdapter(MainActivity.this, mCardItemList);
-        mRecyclerView.setAdapter(mCardAdapter);
+        
         mCardAdapter.notifyDataSetChanged();
 
 
