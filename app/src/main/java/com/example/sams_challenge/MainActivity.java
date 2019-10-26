@@ -2,6 +2,8 @@ package com.example.sams_challenge;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -37,6 +39,8 @@ public class MainActivity extends AppCompatActivity {
     private RequestQueue mRequestQueue;
     private LinearLayoutManager layoutManager;
     private int page = 1;
+    private ProgressBar progressBarLoading;
+
 
 
     String main_url = "https://mobile-tha-server.firebaseapp.com";
@@ -52,8 +56,13 @@ public class MainActivity extends AppCompatActivity {
         mRecyclerView = findViewById(R.id.recycler_view);
         layoutManager = new LinearLayoutManager(getApplicationContext());
         mRecyclerView.setLayoutManager(layoutManager);
+        progressBarLoading = findViewById(R.id.progressBarLoading);
+
 
         mCardAdapter = new CardAdapter(MainActivity.this,mCardItemList);
+
+        progressBarLoading.setVisibility(View.INVISIBLE);
+
         mRecyclerView.setAdapter(mCardAdapter);
 
         mRecyclerView.addOnScrollListener(prOnScrollListener);
@@ -79,6 +88,7 @@ public class MainActivity extends AppCompatActivity {
             if(islastItemDisplaying(recyclerView)){
                 //so i would call the get data method here
                 // show loading progress
+                progressBarLoading.setVisibility(View.VISIBLE);
                 getData();
                 Log.i("ListActivity", "LoadMore");
             }
@@ -131,7 +141,9 @@ public class MainActivity extends AppCompatActivity {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        
+
+        progressBarLoading.setVisibility(View.INVISIBLE);
+
         mCardAdapter.notifyDataSetChanged();
 
 

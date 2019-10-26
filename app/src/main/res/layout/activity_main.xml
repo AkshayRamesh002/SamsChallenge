@@ -12,4 +12,11 @@
         android:layout_height="match_parent"
         android:background="@android:color/darker_gray" />
 
+    <ProgressBar
+        style="?android:attr/progressBarStyleSmall"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:id="@+id/progressBarLoading"
+        android:layout_alignParentBottom="true" />
+
 </RelativeLayout>
