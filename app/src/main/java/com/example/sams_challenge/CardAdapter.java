@@ -47,9 +47,13 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.CardViewHolder
         String productShortDescription = cardItem.getShortDescription();
         String productPrice = cardItem.getPrice();
 
-        holder.textViewproductName.setText("Product Name: " + productName);
-        holder.textViewshortDescription.setText("Short Description: " + Html.fromHtml(productShortDescription));
-        holder.textViewPrice.setText("Price: " + productPrice);
+        String productNameSource = "<b>" + "Product Name: " + "</b> " + productName;
+        String productShortDescriptionSource = "<b>" + "Short Description: " + "</b> " + productShortDescription;
+        String productPRiceSource = "<b>" + "Price: " + "</b> " + productPrice;
+
+        holder.textViewproductName.setText(Html.fromHtml(productNameSource));
+        holder.textViewshortDescription.setText(Html.fromHtml(productShortDescriptionSource));
+        holder.textViewPrice.setText(Html.fromHtml(productPRiceSource));
         Picasso.get().load(productImageURL).fit().centerInside().into(holder.productimageView);
 
     }

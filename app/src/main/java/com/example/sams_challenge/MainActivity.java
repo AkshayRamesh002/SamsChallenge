@@ -133,8 +133,21 @@ public class MainActivity extends AppCompatActivity implements CardAdapter.OnCar
                 Log.i("PRODUCT_NAME", productName);
                 String price = hit.optString("price");
                 String imageUrl = hit.optString("productImage");
+                String longDescription = hit.optString("longDescription");
+                double reviewRating = hit.getDouble("reviewRating");
+                Log.i("REVIEW_RATING",""+reviewRating);
+                int reviewCount = hit.getInt("reviewCount");
+                boolean inStock = hit.getBoolean("inStock");
+                String inStockStr = "";
 
-                mCardItemList.add(new CardItem(productName, shortDescription, price, main_url + imageUrl));
+                if(inStock == true){
+                    inStockStr = "Yes";
+                }
+                else{
+                    inStockStr = "No";
+                }
+
+                mCardItemList.add(new CardItem(productName, shortDescription, price, main_url + imageUrl, longDescription, reviewRating, reviewCount, inStockStr));
             }
 
 
@@ -206,9 +219,13 @@ public class MainActivity extends AppCompatActivity implements CardAdapter.OnCar
 
         Intent i = new Intent(MainActivity.this, ProductDetailActivity.class);
         i.putExtra("product_name",mCardItemList.get(position).getProductName());
-        i.putExtra("product_short_description",mCardItemList.get(position).getShortDescription());
         i.putExtra("product_image",mCardItemList.get(position).getProductImageUrl());
         i.putExtra("product_price",mCardItemList.get(position).getPrice());
+        i.putExtra("product_longDescription",mCardItemList.get(position).getLongDescription());
+        i.putExtra("product_review_rating",mCardItemList.get(position).getReviewRating());
+        i.putExtra("product_review_count",mCardItemList.get(position).getReviewCount());
+        i.putExtra("product_in_stock",mCardItemList.get(position).getInStock());
+
         startActivity(i);
     }
 }

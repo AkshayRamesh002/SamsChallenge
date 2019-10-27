@@ -1,38 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="16dp"
-    tools:context=".ProductDetailActivity">
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
 
-    <ImageView
-        android:id="@+id/product_detail_image_view"
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:src="@mipmap/ic_launcher" />
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="16dp"
+        tools:context=".ProductDetailActivity">
 
-    <TextView
-        android:id="@+id/product_detail_text_view_product_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Product Name"
-        android:textColor="@android:color/black" />
+        <ImageView
+            android:id="@+id/product_detail_image_view"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:src="@mipmap/ic_launcher" />
 
-    <TextView
-        android:id="@+id/product_detail_text_view_short_description"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Short Description"
-        android:textColor="@android:color/black" />
+        <TextView
+            android:id="@+id/product_detail_text_view_product_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Product Name"
+            android:textColor="@android:color/black" />
 
-    <TextView
-        android:id="@+id/product_detail_text_view_price"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Price"
-        android:textColor="@android:color/black" />
+        <TextView
+            android:id="@+id/product_detail_text_view_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Price"
+            android:textColor="@android:color/black" />
 
-</LinearLayout>
+        <TextView
+            android:id="@+id/product_detail_long_description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Long Description"
+            android:textColor="@android:color/black" />
+
+        <TextView
+            android:id="@+id/product_detail_text_view_review_rating"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Review Rating"
+            android:textColor="@android:color/black" />
+
+        <TextView
+            android:id="@+id/product_detail_text_view_review_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Review Count"
+            android:textColor="@android:color/black" />
+
+        <TextView
+            android:id="@+id/product_detail_text_view_in_stock"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="In Stock"
+            android:textColor="@android:color/black" />
+
+    </LinearLayout>
+</ScrollView>
