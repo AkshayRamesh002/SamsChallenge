@@ -20,11 +20,13 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.CardViewHolder
 
     private Context mcontext;
     private ArrayList<CardItem> mcardItemList;
+    private OnCardListener mOnCardListener;
 
-    public CardAdapter(Context context, ArrayList<CardItem> cardItemList) {
+    public CardAdapter(Context context, ArrayList<CardItem> cardItemList, OnCardListener onCardListener) {
 
         mcontext = context;
         mcardItemList = cardItemList;
+        mOnCardListener = onCardListener;
 
     }
 
@@ -32,7 +34,7 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.CardViewHolder
     @Override
     public CardViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(mcontext).inflate(R.layout.card_item, parent, false);
-        return new CardViewHolder(v);
+        return new CardViewHolder(v, mOnCardListener);
     }
 
     @Override
@@ -57,22 +59,39 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.CardViewHolder
         return mcardItemList.size();
     }
 
-    public class CardViewHolder extends RecyclerView.ViewHolder {
+    public class CardViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         public ImageView productimageView;
         public TextView textViewproductName;
         public TextView textViewshortDescription;
         public TextView textViewPrice;
+        OnCardListener onCardListener;
 
 
-        public CardViewHolder(@NonNull View itemView) {
+        public CardViewHolder(@NonNull View itemView, OnCardListener onCardListener) {
             super(itemView);
 
             productimageView = itemView.findViewById(R.id.product_image_view);
             textViewproductName = itemView.findViewById(R.id.text_view_product_name);
             textViewshortDescription = itemView.findViewById(R.id.text_view_short_description);
             textViewPrice = itemView.findViewById(R.id.text_view_price);
+            this.onCardListener = onCardListener;
+
+            itemView.setOnClickListener(this);
         }
+
+        @Override
+        public void onClick(View view) {
+
+            onCardListener.onCardClick(getAdapterPosition());
+
+
+        }
+    }
+
+    public interface OnCardListener{
+
+        void onCardClick(int position);
     }
 
 

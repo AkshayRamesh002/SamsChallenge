@@ -31,7 +31,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements CardAdapter.OnCardListener {
 
     private RecyclerView mRecyclerView;
     private ArrayList<CardItem> mCardItemList = new ArrayList<>();
@@ -59,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
         progressBarLoading = findViewById(R.id.progressBarLoading);
 
 
-        mCardAdapter = new CardAdapter(MainActivity.this,mCardItemList);
+        mCardAdapter = new CardAdapter(MainActivity.this,mCardItemList, this);
 
         progressBarLoading.setVisibility(View.INVISIBLE);
 
@@ -199,6 +199,11 @@ public class MainActivity extends AppCompatActivity {
         return jsonObjectRequest;
 
     }
-    
+
+    @Override
+    public void onCardClick(int position) {
+
+        Toast.makeText(this, "clicked" + position, Toast.LENGTH_SHORT).show();
+    }
 }
 
