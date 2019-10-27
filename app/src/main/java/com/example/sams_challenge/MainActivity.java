@@ -1,5 +1,6 @@
 package com.example.sams_challenge;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -124,14 +125,14 @@ public class MainActivity extends AppCompatActivity implements CardAdapter.OnCar
             for (int i = 0; i < jsonArray.length(); i++) {
                 JSONObject hit = jsonArray.getJSONObject(i);
 
-                String productName = hit.getString("productName");
+                String productName = hit.optString("productName");
                 String shortDescription = hit.optString("shortDescription");
                 if (shortDescription.equals("")) {
                     shortDescription = "NONE";
                 }
                 Log.i("PRODUCT_NAME", productName);
-                String price = hit.getString("price");
-                String imageUrl = hit.getString("productImage");
+                String price = hit.optString("price");
+                String imageUrl = hit.optString("productImage");
 
                 mCardItemList.add(new CardItem(productName, shortDescription, price, main_url + imageUrl));
             }
@@ -203,7 +204,12 @@ public class MainActivity extends AppCompatActivity implements CardAdapter.OnCar
     @Override
     public void onCardClick(int position) {
 
-        Toast.makeText(this, "clicked" + position, Toast.LENGTH_SHORT).show();
+        Intent i = new Intent(MainActivity.this, ProductDetailActivity.class);
+        i.putExtra("product_name",mCardItemList.get(position).getProductName());
+        i.putExtra("product_short_description",mCardItemList.get(position).getShortDescription());
+        i.putExtra("product_image",mCardItemList.get(position).getProductImageUrl());
+        i.putExtra("product_price",mCardItemList.get(position).getPrice());
+        startActivity(i);
     }
 }
 
