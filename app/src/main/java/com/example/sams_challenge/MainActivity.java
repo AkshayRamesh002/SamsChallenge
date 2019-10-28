@@ -225,6 +225,8 @@ public class MainActivity extends AppCompatActivity implements CardAdapter.OnCar
         i.putExtra("product_review_rating",mCardItemList.get(position).getReviewRating());
         i.putExtra("product_review_count",mCardItemList.get(position).getReviewCount());
         i.putExtra("product_in_stock",mCardItemList.get(position).getInStock());
+        i.putExtra("card_item_list", mCardItemList);
+        i.putExtra("position_clicked", position);
 
         startActivity(i);
     }

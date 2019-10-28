@@ -1,6 +1,8 @@
 package com.example.sams_challenge;
 
-public class CardItem {
+import java.io.Serializable;
+
+public class CardItem implements Serializable {
 
     private String productName;
     private String shortDescription;

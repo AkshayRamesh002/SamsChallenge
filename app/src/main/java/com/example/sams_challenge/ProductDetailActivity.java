@@ -1,13 +1,13 @@
 package com.example.sams_challenge;
 
 import android.os.Bundle;
-import android.text.Html;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.viewpager.widget.ViewPager;
 
-import com.squareup.picasso.Picasso;
+import java.util.ArrayList;
 
 public class ProductDetailActivity extends AppCompatActivity {
 
@@ -21,14 +21,15 @@ public class ProductDetailActivity extends AppCompatActivity {
     public TextView product_detail_in_stock;
 
 
-    String productNameIntent, productShortDescriptionIntent, productImageIntent, productPriceIntent, productLongDescriptionIntent, productInStockIntent;
+    String productNameIntent, productImageIntent, productPriceIntent, productLongDescriptionIntent, productInStockIntent;
     double productReviewRatingIntent;
-    int productReviewCountIntent;
+    int productReviewCountIntent, getPositionIntent;
+    ArrayList<CardItem> cardItemListIntent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_product_detail);
+        setContentView(R.layout.view_pager_layout);
 
         product_detail_productimageView = findViewById(R.id.product_detail_image_view);
         product_detail_textViewproductName = findViewById(R.id.product_detail_text_view_product_name);
@@ -37,6 +38,7 @@ public class ProductDetailActivity extends AppCompatActivity {
         product_detail_review_rating = findViewById(R.id.product_detail_text_view_review_rating);
         product_detail_review_count = findViewById(R.id.product_detail_text_view_review_count);
         product_detail_in_stock = findViewById(R.id.product_detail_text_view_in_stock);
+        cardItemListIntent = new ArrayList<>();
 
 
         Bundle extras = getIntent().getExtras();
@@ -49,29 +51,16 @@ public class ProductDetailActivity extends AppCompatActivity {
             productReviewRatingIntent = extras.getDouble("product_review_rating");
             productReviewCountIntent = extras.getInt("product_review_count");
             productInStockIntent = extras.getString("product_in_stock");
-
+            cardItemListIntent = (ArrayList<CardItem>) extras.getSerializable("card_item_list");
+            getPositionIntent= extras.getInt("position_clicked");
 
 
         }
 
-        String productNameSource = "<b>" + "Product Name: " + "</b> " + productNameIntent;
-        String productPriceSource = "<b>" + "Price: " + "</b> " + productPriceIntent;
-        String productLongDescriptionSource = "<b>" + "Long Description: " + "</b> " + productLongDescriptionIntent;
-        String productReviewRatingSource = "<b>" + "Review Rating: " + "</b> " + productReviewRatingIntent;
-        String productReviewCountSource = "<b>" + "Review Count: " + "</b> " + productReviewCountIntent;
-        String productInStockSource = "<b>" + "In Stock: " + "</b> " + productInStockIntent;
-
-
-        product_detail_textViewproductName.setText(Html.fromHtml(productNameSource));
-        product_detail_textViewPrice.setText(Html.fromHtml(productPriceSource));
-
-        product_detail_long_description.setText(Html.fromHtml(productLongDescriptionSource));
-        product_detail_review_rating.setText(Html.fromHtml(productReviewRatingSource));
-        product_detail_review_count.setText(Html.fromHtml(productReviewCountSource));
-        product_detail_in_stock.setText(Html.fromHtml(productInStockSource));
-
-
-        Picasso.get().load(productImageIntent).fit().centerInside().into(product_detail_productimageView);
+        ViewPager viewPager = findViewById(R.id.view_pager);
+        ViewPagerAdapter adapter = new ViewPagerAdapter(this, cardItemListIntent);
+        viewPager.setAdapter(adapter);
+        viewPager.setCurrentItem(getPositionIntent);
 
     }
 }

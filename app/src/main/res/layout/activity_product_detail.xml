@@ -59,5 +59,14 @@
             android:text="In Stock"
             android:textColor="@android:color/black" />
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:padding="16dp"
+            android:textStyle="bold"
+            android:text="Swipe Left or Right for other products"
+            android:textColor="@android:color/black" />
+
     </LinearLayout>
 </ScrollView>
