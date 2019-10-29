@@ -24,7 +24,7 @@ public class ProductDetailActivity extends AppCompatActivity {
     String productNameIntent, productImageIntent, productPriceIntent, productLongDescriptionIntent, productInStockIntent;
     double productReviewRatingIntent;
     int productReviewCountIntent, getPositionIntent;
-    ArrayList<CardItem> cardItemListIntent;
+    ArrayList<Product> cardItemListIntent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,8 +51,8 @@ public class ProductDetailActivity extends AppCompatActivity {
             productReviewRatingIntent = extras.getDouble("product_review_rating");
             productReviewCountIntent = extras.getInt("product_review_count");
             productInStockIntent = extras.getString("product_in_stock");
-            cardItemListIntent = (ArrayList<CardItem>) extras.getSerializable("card_item_list");
-            getPositionIntent= extras.getInt("position_clicked");
+            cardItemListIntent = (ArrayList<Product>) extras.getSerializable("card_item_list");
+            getPositionIntent = extras.getInt("position_clicked");
 
 
         }

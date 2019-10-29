@@ -18,11 +18,11 @@ import java.util.ArrayList;
 
 public class ViewPagerAdapter extends PagerAdapter {
 
-    private Context context;
-    private ArrayList<CardItem> cardItemList;
     LayoutInflater inflater;
+    private Context context;
+    private ArrayList<Product> cardItemList;
 
-    ViewPagerAdapter(Context context, ArrayList<CardItem> cardItemList) {
+    ViewPagerAdapter(Context context, ArrayList<Product> cardItemList) {
         this.context = context;
         this.cardItemList = cardItemList;
     }
@@ -41,7 +41,6 @@ public class ViewPagerAdapter extends PagerAdapter {
     @Override
     public Object instantiateItem(@NonNull ViewGroup container, int position) {
 
-        // Declare Variables
         ImageView product_detail_productimageView;
         TextView product_detail_textViewproductName;
         TextView product_detail_textViewPrice;
@@ -56,7 +55,6 @@ public class ViewPagerAdapter extends PagerAdapter {
         View itemView = inflater.inflate(R.layout.activity_product_detail, container,
                 false);
 
-        // Locate the TextViews in viewpager_item.xml
         product_detail_productimageView = itemView.findViewById(R.id.product_detail_image_view);
         product_detail_textViewproductName = itemView.findViewById(R.id.product_detail_text_view_product_name);
         product_detail_textViewPrice = itemView.findViewById(R.id.product_detail_text_view_price);
@@ -65,12 +63,12 @@ public class ViewPagerAdapter extends PagerAdapter {
         product_detail_review_count = itemView.findViewById(R.id.product_detail_text_view_review_count);
         product_detail_in_stock = itemView.findViewById(R.id.product_detail_text_view_in_stock);
 
-        String productNameSource = "<b>" + "Product Name: " + "</b> " + cardItemList.get(position).getProductName();
-        String productPriceSource = "<b>" + "Price: " + "</b> " + cardItemList.get(position).getPrice();
-        String productLongDescriptionSource = "<b>" + "Long Description: " + "</b> " + cardItemList.get(position).getLongDescription();
-        String productReviewRatingSource = "<b>" + "Review Rating: " + "</b> " + cardItemList.get(position).getReviewRating();
-        String productReviewCountSource = "<b>" + "Review Count: " + "</b> " + cardItemList.get(position).getReviewCount();
-        String productInStockSource = "<b>" + "In Stock: " + "</b> " + cardItemList.get(position).getInStock();
+        String productNameSource = ConfigValues.PRODUCT_NAME_TITLE + cardItemList.get(position).getProductName();
+        String productPriceSource = ConfigValues.PRODUCT_PRICE_TITLE + cardItemList.get(position).getPrice();
+        String productLongDescriptionSource = ConfigValues.PRODUCT_LONG_DESCRIPTION_TITLE + cardItemList.get(position).getLongDescription();
+        String productReviewRatingSource = ConfigValues.PRODUCT_REVIEW_RATING_TITLE + cardItemList.get(position).getReviewRating();
+        String productReviewCountSource = ConfigValues.PRODUCT_REVIEW_COUNT_TITLE + cardItemList.get(position).getReviewCount();
+        String productInStockSource = ConfigValues.PRODUCT_IN_STOCK_TITLE + cardItemList.get(position).getInStock();
 
 
         product_detail_textViewproductName.setText(Html.fromHtml(productNameSource));
@@ -84,7 +82,6 @@ public class ViewPagerAdapter extends PagerAdapter {
 
         Picasso.get().load(cardItemList.get(position).getProductImageUrl()).fit().centerInside().into(product_detail_productimageView);
 
-        // Add viewpager_item.xml to ViewPager
         ((ViewPager) container).addView(itemView);
 
         return itemView;

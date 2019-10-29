@@ -19,10 +19,10 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.CardViewHolder
 
 
     private Context mcontext;
-    private ArrayList<CardItem> mcardItemList;
+    private ArrayList<Product> mcardItemList;
     private OnCardListener mOnCardListener;
 
-    public CardAdapter(Context context, ArrayList<CardItem> cardItemList, OnCardListener onCardListener) {
+    public CardAdapter(Context context, ArrayList<Product> cardItemList, OnCardListener onCardListener) {
 
         mcontext = context;
         mcardItemList = cardItemList;
@@ -40,16 +40,16 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.CardViewHolder
     @Override
     public void onBindViewHolder(@NonNull CardViewHolder holder, int position) {
 
-        CardItem cardItem = mcardItemList.get(position);
+        Product product = mcardItemList.get(position);
 
-        String productImageURL = cardItem.getProductImageUrl();
-        String productName = cardItem.getProductName();
-        String productShortDescription = cardItem.getShortDescription();
-        String productPrice = cardItem.getPrice();
+        String productImageURL = product.getProductImageUrl();
+        String productName = product.getProductName();
+        String productShortDescription = product.getShortDescription();
+        String productPrice = product.getPrice();
 
-        String productNameSource = "<b>" + "Product Name: " + "</b> " + productName;
-        String productShortDescriptionSource = "<b>" + "Short Description: " + "</b> " + productShortDescription;
-        String productPRiceSource = "<b>" + "Price: " + "</b> " + productPrice;
+        String productNameSource = ConfigValues.PRODUCT_NAME_TITLE + productName;
+        String productShortDescriptionSource = ConfigValues.PRODUCT_SHORT_DESCRIPTION_TITLE + productShortDescription;
+        String productPRiceSource = ConfigValues.PRODUCT_PRICE_TITLE + productPrice;
 
         holder.textViewproductName.setText(Html.fromHtml(productNameSource));
         holder.textViewshortDescription.setText(Html.fromHtml(productShortDescriptionSource));
@@ -61,6 +61,11 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.CardViewHolder
     @Override
     public int getItemCount() {
         return mcardItemList.size();
+    }
+
+    public interface OnCardListener {
+
+        void onCardClick(int position);
     }
 
     public class CardViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
@@ -91,11 +96,6 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.CardViewHolder
 
 
         }
-    }
-
-    public interface OnCardListener{
-
-        void onCardClick(int position);
     }
 
 

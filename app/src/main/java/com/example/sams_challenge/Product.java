@@ -2,7 +2,7 @@ package com.example.sams_challenge;
 
 import java.io.Serializable;
 
-public class CardItem implements Serializable {
+public class Product implements Serializable {
 
     private String productName;
     private String shortDescription;
@@ -13,7 +13,7 @@ public class CardItem implements Serializable {
     private int reviewCount;
     private String inStock;
 
-    public CardItem(String productName, String shortDescription, String price, String productImageUrl, String longDescription, double reviewRating, int reviewCount, String inStock) {
+    public Product(String productName, String shortDescription, String price, String productImageUrl, String longDescription, double reviewRating, int reviewCount, String inStock) {
         this.productName = productName;
         this.shortDescription = shortDescription;
         this.price = price;
