@@ -2,6 +2,7 @@ package com.example.sams_challenge;
 
 import android.content.Context;
 import android.text.Html;
+import android.text.method.LinkMovementMethod;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -72,11 +73,21 @@ public class ViewPagerAdapter extends PagerAdapter {
 
 
         product_detail_textViewproductName.setText(Html.fromHtml(productNameSource));
+        product_detail_textViewproductName.setMovementMethod(LinkMovementMethod.getInstance());
+
         product_detail_textViewPrice.setText(Html.fromHtml(productPriceSource));
+        product_detail_textViewPrice.setMovementMethod(LinkMovementMethod.getInstance());
+
 
         product_detail_long_description.setText(Html.fromHtml(productLongDescriptionSource));
+        product_detail_long_description.setMovementMethod(LinkMovementMethod.getInstance());
+
         product_detail_review_rating.setText(Html.fromHtml(productReviewRatingSource));
+        product_detail_review_rating.setMovementMethod(LinkMovementMethod.getInstance());
+
         product_detail_review_count.setText(Html.fromHtml(productReviewCountSource));
+        product_detail_review_count.setMovementMethod(LinkMovementMethod.getInstance());
+
         product_detail_in_stock.setText(Html.fromHtml(productInStockSource));
 
 
